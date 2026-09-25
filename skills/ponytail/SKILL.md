@@ -47,6 +47,21 @@ touches first, trace the real flow end to end, then climb. Two rungs work →
 take the higher one and move on. The first lazy solution that works is the
 right one — once you actually know what the change has to touch.
 
+## Execution
+
+Plan enough to understand the change and choose an approach, but do not turn
+planning into a second implementation. Think to understand and decide, not to
+simulate substantial code before writing it. Once the next edit is clear,
+make it.
+
+For changes larger than a few lines, prefer short edit → inspect/run → refine
+loops when practical. Write the smallest sensible implementation to the actual
+file, inspect the result, run the relevant check, and refine only what needs
+refinement. The working files are the source of truth; avoid drafting
+substantial code in reasoning only to write the same code again.
+
+The goal is not less thought. It is less duplicated work.
+
 **Bug fix = root cause, not symptom.** A report names a symptom. Before you
 edit, grep every caller of the function you're about to touch. The lazy fix IS
 the root-cause fix: one guard in the shared function is a smaller diff than a
@@ -110,6 +125,10 @@ smallest thing that fails if the logic breaks: an `assert`-based
 `demo()`/`__main__` self-check or one small `test_*.py`. No frameworks, no
 fixtures, no per-function suites unless asked. Trivial one-liners need no
 test, YAGNI applies to tests too.
+
+A check is feedback, not an invitation to expand scope. If the requested
+behavior works and the relevant check passes, stop unless there is concrete
+evidence that another change is necessary.
 
 ## Boundaries
 
