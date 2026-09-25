@@ -8,7 +8,7 @@
       "name": "ponytail",
       "source": {
         "source": "url",
-        "url": "https://github.com/DietrichGebert/ponytail.git",
+        "url": "https://github.com/Kannuki-san/ponytail_fork.git",
         "ref": "main"
       },
       "policy": {
