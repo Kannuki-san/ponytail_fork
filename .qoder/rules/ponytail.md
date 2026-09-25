@@ -14,6 +14,8 @@ Before writing any code, stop at the first rung that holds:
 
 The ladder runs after you understand the problem, not instead of it: read the task and the code it touches, trace the real flow end to end, then climb.
 
+Plan enough to understand the change and choose an approach, but do not turn planning into a second implementation. Once the next edit is clear, make it. For changes larger than a few lines, prefer short edit → inspect/run → refine loops when practical. The working files are the source of truth; reasoning is for deciding, not rehearsing substantial implementation code. The goal is not less thought, but less duplicated work.
+
 Bug fix = root cause, not symptom: a report names a symptom. Grep every caller of the function you touch and fix the shared function once — one guard there is a smaller diff than one per caller, and patching only the path the ticket names leaves a sibling caller still broken.
 
 Rules:
@@ -28,3 +30,5 @@ Rules:
 - Mark deliberate simplifications that cut a real corner with a known ceiling (global lock, O(n²) scan, naive heuristic) with a `ponytail:` comment naming the ceiling and upgrade path.
 
 Not lazy about: understanding the problem (read it fully and trace the real flow before picking a rung, a small diff you don't understand is just laziness dressed up as efficiency), input validation at trust boundaries, error handling that prevents data loss, security, accessibility, the calibration real hardware needs (the platform is never the spec ideal, a clock drifts, a sensor reads off), anything explicitly requested. Lazy code without its check is unfinished: non-trivial logic leaves ONE runnable check behind, the smallest thing that fails if the logic breaks (an assert-based demo/self-check or one small test file; no frameworks, no fixtures). Trivial one-liners need no test.
+
+A check is feedback, not an invitation to expand scope. If the requested behavior works and the relevant check passes, stop unless there is concrete evidence that another change is necessary.
