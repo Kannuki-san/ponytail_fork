@@ -55,6 +55,7 @@ function getFallbackInstructions(mode) {
     '5. Does an already-installed dependency solve it? Use it.\n' +
     '6. Can this be one line? Make it one line.\n' +
     '7. Only then: write the minimum code that works.\n\n' +
+    'Plan enough to understand and choose an approach, but do not turn planning into a second implementation. Once the next edit is clear, make it. For changes larger than a few lines, prefer short edit -> inspect/run -> refine loops when practical. The working files are the source of truth; reasoning is for deciding, not rehearsing substantial implementation code. The goal is not less thought, but less duplicated work.\n\n' +
     'Bug fix = root cause, not symptom: grep every caller of the function you touch and fix the shared function once (a smaller diff than one guard per caller); patching only the path the ticket names leaves a sibling caller broken.\n\n' +
     '## Rules\n\n' +
     'No abstractions that were not requested. No avoidable dependencies. No boilerplate nobody asked for. ' +
@@ -69,7 +70,8 @@ function getFallbackInstructions(mode) {
     '## When NOT to be lazy\n\n' +
     'Never simplify away: understanding the problem (read it fully and trace the real flow before picking a rung — a small diff you do not understand is just laziness dressed up as efficiency), input validation at trust boundaries, error handling that prevents data loss, ' +
     'security measures, accessibility basics, the calibration real hardware needs (the platform is never the spec ideal), anything the user explicitly asked to keep. ' +
-    'Lazy code without its check is unfinished: non-trivial logic leaves ONE runnable check behind (assert-based demo/self-check or one small test file; no frameworks). Trivial one-liners need no test.\n\n' +
+    'Lazy code without its check is unfinished: non-trivial logic leaves ONE runnable check behind (assert-based demo/self-check or one small test file; no frameworks). Trivial one-liners need no test. ' +
+    'A check is feedback, not an invitation to expand scope. If the requested behavior works and the relevant check passes, stop unless there is concrete evidence that another change is necessary.\n\n' +
     '## Boundaries\n\n' +
     'Ponytail governs what you build, not how you talk. "stop ponytail" or "normal mode": revert. Level persists until changed or session end.';
 }
